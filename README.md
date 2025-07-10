@@ -71,3 +71,4 @@ export default tseslint.config([
 # recette_locale
 # recette-locale
 # recette-locale-New-release-
+# recette-locale-New-release-
