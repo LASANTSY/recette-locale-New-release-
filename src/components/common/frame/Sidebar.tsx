@@ -69,7 +69,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       {/* Bouton menu mobile */}
       <button
         onClick={toggleMobile}
-        className="md:hidden fixed top-4 left-4 z-50 p-2 bg-white rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 transition-colors"
+        className="md:hidden fixed top-2 left-4 z-50 p-1 bg-white rounded-lg shadow-sm border border-gray-200 h over:bg-gray-50 transition-colors"
         aria-label="Toggle mobile menu"
       >
         {isMobileOpen ? <X size={20} /> : <Menu size={20} />}
@@ -132,7 +132,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                       w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left
                       transition-all duration-200 ease-in-out group relative
                       ${isActive 
-                        ? 'bg-blue-50 text-blue-700 font-medium' 
+                        ? 'bg-blue-300 text-blue-700 font-medium' 
                         : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
                       }
                       ${isCollapsed ? 'justify-center' : ''}
