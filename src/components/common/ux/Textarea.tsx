@@ -15,7 +15,7 @@ const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(({
   error,
   helperText,
   resize = 'vertical',
-  autoResize = false,
+  // autoResize = false,
   className = '',
   ...props
 }, ref) => {
