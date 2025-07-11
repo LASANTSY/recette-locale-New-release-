@@ -138,20 +138,27 @@ const Navbar: React.FC<NavbarProps> = ({
     }
   };
 
+  // Calcul du padding gauche en fonction de l'état du sidebar
+  const getNavbarPadding = () => {
+    if (isMobile) return 'pl-4 sm:pl-6';
+    return isSidebarCollapsed ? 'pl-20' : `pl-[${sidebarWidth}px]`;
+  };
+
   return (
     <nav 
       className={`
-        h-16 transition-all duration-300 ease-in-out shadow-sm z-30
+        fixed top-0 left-0 right-0 h-16 transition-all duration-300 ease-in-out shadow-sm z-30
         ${isDarkMode 
           ? 'bg-gray-800 border-gray-700' 
           : 'bg-white border-gray-200'
         }
-        ${isMobile ? 'w-full' : ''}
         border-b
+        ${getNavbarPadding()}
         ${className}
       `}
+      style={!isMobile && !isSidebarCollapsed ? { left: `${sidebarWidth}px` } : {}}
     >
-      <div className="flex items-center justify-between h-full px-4 sm:px-6">
+      <div className="flex items-center justify-between h-full pr-4 sm:pr-6">
         {/* Bouton menu mobile + Message de salutation */}
         <div className="flex items-center flex-1 min-w-0">
           {/* Bouton menu mobile */}
@@ -316,14 +323,16 @@ const Navbar: React.FC<NavbarProps> = ({
               </div>
               
               {/* Nom utilisateur - caché sur très petits écrans */}
-              <div className="hidden sm:block text-left min-w-0">
-                <p className={`text-sm font-medium truncate ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
-                  {userName}
-                </p>
-                <p className={`text-xs truncate ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                  {userRole}
-                </p>
-              </div>
+              {!isMobile && (
+                <div className="hidden sm:block text-left min-w-0">
+                  <p className={`text-sm font-medium truncate ${isDarkMode ? 'text-white' : 'text-gray-800'}`}>
+                    {userName}
+                  </p>
+                  <p className={`text-xs truncate ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                    {userRole}
+                  </p>
+                </div>
+              )}
               
               <ChevronDown size={14} className={`sm:w-4 sm:h-4 flex-shrink-0 ${isDarkMode ? 'text-gray-400' : 'text-gray-400'}`} />
             </button>
