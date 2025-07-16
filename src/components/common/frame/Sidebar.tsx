@@ -3,7 +3,6 @@ import {
   ChevronLeft, 
   ChevronRight, 
   Menu,
-  X,
   Home,
   Settings,
   Users,
@@ -87,7 +86,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         className="md:hidden fixed top-2 left-4 z-50 p-1 bg-white rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 transition-colors"
         aria-label="Toggle mobile menu"
       >
-        {isMobileOpen ? <X size={20} className="text-gray-700" /> : <Menu size={20} className="text-gray-700" />}
+        {isMobileOpen ? <Menu size={20} className="text-gray-700" /> : <Menu size={20} className="text-gray-700" />}
       </button>
 
       {/* Overlay mobile */}
@@ -110,7 +109,7 @@ const Sidebar: React.FC<SidebarProps> = ({
         `}
       >
         {/* Header avec logo */}
-        <div className={` flex items-center ${sidebarCollapsed ? 'justify-center p-[18px] border-b border-gray-300' : 'justify-between border-b border-gray-300 p-[13px]'}`}>
+        <div className={`flex items-center ${sidebarCollapsed ? 'justify-center p-[18px] border-b border-gray-300' : 'justify-between border-b border-gray-300 p-[13px]'} ${isMobile ? 'p-[18px]' : ''}`}>
           <div className="flex items-center gap-3 min-w-0">
             <Logo 
               size={28} 

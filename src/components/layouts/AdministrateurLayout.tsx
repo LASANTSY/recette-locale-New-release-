@@ -90,10 +90,10 @@ const AdministrateurLayout: React.FC = () => {
       {/* Contenu principal */}
       <div 
         className="flex-1 flex flex-col transition-all duration-300 ease-in-out"
-        style={{ 
-          marginLeft: `${currentSidebarWidth}px`,
-          width: `calc(100% - ${currentSidebarWidth}px)`
-        }}
+        // style={{ 
+        //   marginLeft: `${currentSidebarWidth}px`,
+        //   width: `calc(100% - ${currentSidebarWidth}px)`
+        // }}
       >
         {/* Navbar fixe */}
         <div 
