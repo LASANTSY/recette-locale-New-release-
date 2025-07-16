@@ -21,5 +21,12 @@ export const mockNotifications: NotificationItem[] = [
     time: 'Il y a 3 heures',
     read: true,
     type: 'warning'
+  },
+  {
+    id: '4',
+    message: 'Audit programmé pour la semaine prochaine',
+    time: 'Il y a 3 heures',
+    read: false,
+    type: 'warning'
   }
 ]; 
