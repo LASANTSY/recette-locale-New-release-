@@ -3,14 +3,8 @@ import {
   ChevronLeft, 
   ChevronRight, 
   Menu,
-  Home,
-  Settings,
-  Users,
-  BarChart3,
-  // Mail,
-  Landmark,
-  Receipt,
-  Wallet
+    // Mail,
+  Landmark
 } from 'lucide-react';
 
 interface SidebarItem {
@@ -21,7 +15,7 @@ interface SidebarItem {
 }
 
 interface SidebarProps {
-  items?: SidebarItem[];
+  items: SidebarItem[];
   activeItem?: string;
   onItemClick?: (item: SidebarItem) => void;
   className?: string;
@@ -33,14 +27,7 @@ interface SidebarProps {
 }
 
 const Sidebar: React.FC<SidebarProps> = ({ 
-  items = [
-    { id: 'home', name: 'Accueil', icon: Home, route: '/' },
-    { id: 'recettes', name: 'Recettes', icon: Receipt, route: '/recettes' },
-    { id: 'comptabilite', name: 'Comptabilité', icon: Wallet, route: '/comptabilite' },
-    { id: 'utilisateurs', name: 'Utilisateurs', icon: Users, route: '/utilisateurs' },
-    { id: 'rapports', name: 'Rapports', icon: BarChart3, route: '/rapports' },
-    { id: 'parametres', name: 'Paramètres', icon: Settings, route: '/parametres' },
-  ], 
+  items,
   activeItem = 'home',
   onItemClick = () => {},
   className = '',
@@ -113,8 +100,7 @@ const Sidebar: React.FC<SidebarProps> = ({
           <div className="flex items-center gap-3 min-w-0">
             <Logo 
               size={28} 
-              className="flex-shrink-0"
-              style={{ color: '#00C21C' }}
+              className="flex-shrink-0 text-[#00C21C]"
             />
             {!sidebarCollapsed && (
               <h4 className="text-lg font-bold text-gray-900 truncate" style={{ color: '#00C21C' }}>
@@ -187,10 +173,7 @@ const Sidebar: React.FC<SidebarProps> = ({
                     
                     <Icon 
                       size={20} 
-                      className="flex-shrink-0 transition-colors duration-200"
-                      style={{
-                        color: isActive ? '#00C21C' : '#5D5D5D'
-                      }}
+                      className={`flex-shrink-0 transition-colors duration-200 ${isActive ? 'text-[#00C21C]' : 'text-[#5D5D5D]'}`}
                     />
                     
                     {!sidebarCollapsed && (
