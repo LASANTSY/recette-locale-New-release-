@@ -10,6 +10,7 @@ import {
   Menu,
   X
 } from 'lucide-react';
+import { useTheme } from '../../../context/ThemeContext';
 
 interface NotificationItem {
   id: string;
@@ -31,8 +32,6 @@ interface NavbarProps {
   onLogout?: () => void;
   onNotificationClick?: (notification: NotificationItem) => void;
   onToggleSidebar?: () => void;
-  onToggleDarkMode?: () => void;
-  isDarkMode?: boolean;
   className?: string;
 }
 
@@ -48,10 +47,10 @@ const Navbar: React.FC<NavbarProps> = ({
   onLogout = () => {},
   onNotificationClick = () => {},
   onToggleSidebar = () => {},
-  onToggleDarkMode = () => {},
-  isDarkMode = false,
   className = ''
 }) => {
+  const { theme, toggleTheme } = useTheme();
+  const isDarkMode = theme === 'dark';
   const [isProfileOpen, setIsProfileOpen] = useState<boolean>(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState<boolean>(false);
   const [greeting, setGreeting] = useState<string>('');
@@ -242,7 +241,7 @@ const Navbar: React.FC<NavbarProps> = ({
         <div className="flex items-center space-x-2 sm:space-x-4">
           {/* Bouton Dark/Light Mode */}
           <button
-            onClick={onToggleDarkMode}
+            onClick={toggleTheme}
             className={`
               p-2 rounded-lg transition-all duration-200 hover:scale-105
               ${isDarkMode 

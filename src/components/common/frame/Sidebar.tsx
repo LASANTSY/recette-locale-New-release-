@@ -3,9 +3,9 @@ import {
   ChevronLeft, 
   ChevronRight, 
   Menu,
-    // Mail,
   Landmark
 } from 'lucide-react';
+import { useTheme } from '../../../context/ThemeContext';
 
 interface SidebarItem {
   id: string;
@@ -37,6 +37,7 @@ const Sidebar: React.FC<SidebarProps> = ({
   isCollapsed = false,
   onToggleCollapse = () => {},
 }) => {
+  const { theme } = useTheme();
   const [isMobileOpen, setIsMobileOpen] = useState<boolean>(false);
   const [isMobile, setIsMobile] = useState<boolean>(false);
 
@@ -70,10 +71,10 @@ const Sidebar: React.FC<SidebarProps> = ({
       {/* Bouton menu mobile */}
       <button
         onClick={toggleMobile}
-        className="md:hidden fixed top-2 left-4 z-50 p-1 bg-white rounded-lg shadow-sm border border-gray-200 hover:bg-gray-50 transition-colors"
+        className="md:hidden fixed top-2 left-4 z-50 p-1 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
         aria-label="Toggle mobile menu"
       >
-        {isMobileOpen ? <Menu size={20} className="text-gray-700" /> : <Menu size={20} className="text-gray-700" />}
+        {isMobileOpen ? <Menu size={20} className="text-gray-700 dark:text-gray-300" /> : <Menu size={20} className="text-gray-700 dark:text-gray-300" />}
       </button>
 
       {/* Overlay mobile */}
@@ -88,7 +89,7 @@ const Sidebar: React.FC<SidebarProps> = ({
       {/* Sidebar */}
       <div 
         className={`
-          fixed md:relative top-0 left-0 h-full bg-white border-r border-gray-100
+          fixed md:relative top-0 left-0 h-full bg-white dark:bg-gray-900 border-r border-gray-100 dark:border-gray-800
           transition-all duration-300 ease-in-out z-50 flex flex-col
           ${sidebarCollapsed ? 'w-16' : 'w-64'}
           ${isMobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
@@ -149,17 +150,17 @@ const Sidebar: React.FC<SidebarProps> = ({
                       w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left
                       transition-all duration-200 ease-in-out group relative
                       ${isActive 
-                        ? 'font-medium border border-opacity-30' 
-                        : 'hover:bg-gray-50'
+                        ? 'font-medium border border-opacity-30 dark:border-opacity-50' 
+                        : 'hover:bg-gray-50 dark:hover:bg-gray-800'
                       }
                       ${sidebarCollapsed ? 'justify-center' : ''}
                     `}
                     style={isActive ? {
-                      backgroundColor: `rgba(${hexToRgb('#00C21C')}, 0.1)`,
+                      backgroundColor: `rgba(${hexToRgb('#00C21C')}, ${theme === 'dark' ? '0.2' : '0.1'})`,
                       borderColor: 'none',
-                      color: darkenColor('#00C21C', 20)
+                      color: theme === 'dark' ? '#00E621' : darkenColor('#00C21C', 20)
                     } : {
-                      color: '#5D5D5D'
+                      color: theme === 'dark' ? '#A0A0A0' : '#5D5D5D'
                     }}
                     title={sidebarCollapsed ? item.name : ''}
                     aria-current={isActive ? 'page' : undefined}
@@ -196,13 +197,16 @@ const Sidebar: React.FC<SidebarProps> = ({
         </nav>
 
         {/* Footer */}
-        {!sidebarCollapsed && (
-          <div className="p-4 border-t border-gray-100">
-            <div className="text-xs text-center" style={{ color: '#5D5D5D' }}>
-              © {new Date().getFullYear()} {companyName}
-            </div>
+        {/* Footer */}
+        <div className="p-4 border-t border-gray-100 dark:border-gray-800">
+          <div className={`flex ${sidebarCollapsed ? 'justify-center' : ''}`}>
+            {!sidebarCollapsed && (
+              <div className="text-xs text-center text-gray-600 dark:text-gray-400">
+                © {new Date().getFullYear()} {companyName}
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
     </>
   );

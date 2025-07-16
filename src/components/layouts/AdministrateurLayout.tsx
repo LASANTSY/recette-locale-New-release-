@@ -11,6 +11,7 @@ import {
 import { Navbar, Sidebar } from '../common/frame/IndexExport';
 import { mockNotifications } from '../common/data/mockNotifications';
 import { mockUserData } from '../common/data/mockUserData';
+import { useTheme } from '../../context/ThemeContext';
 
 type SidebarItem = {
   id: string;
@@ -29,8 +30,8 @@ type NotificationItem = {
 
 const AdministrateurLayout: React.FC = () => {
   const [isSidebarCollapsed, setIsSidebarCollapsed] = useState<boolean>(false);
-  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
   const [activeItem, setActiveItem] = useState<string>('dashboard');
+  const { theme } = useTheme();
 
   const SIDEBAR_WIDTH_EXPANDED = 256;
   const SIDEBAR_WIDTH_COLLAPSED = 64;
@@ -62,16 +63,12 @@ const AdministrateurLayout: React.FC = () => {
     setIsSidebarCollapsed(!isSidebarCollapsed);
   };
 
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode);
-  };
-
   const currentSidebarWidth = isSidebarCollapsed 
     ? SIDEBAR_WIDTH_COLLAPSED 
     : SIDEBAR_WIDTH_EXPANDED;
 
   return (
-    <div className={`flex h-screen ${isDarkMode ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
+    <div className={`flex h-screen ${theme === 'dark' ? 'dark bg-gray-900' : 'bg-gray-50'}`}>
       {/* Sidebar fixe */}
       <div 
         className="fixed left-0 top-0 h-full z-20 transition-all duration-300 ease-in-out"
@@ -115,8 +112,6 @@ const AdministrateurLayout: React.FC = () => {
             onProfileClick={() => console.log('Profil cliqué')}
             onSettingsClick={() => console.log('Paramètres cliqués')}
             onToggleSidebar={toggleSidebar}
-            onToggleDarkMode={toggleDarkMode}
-            isDarkMode={isDarkMode}
           />
         </div>
 
