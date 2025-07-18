@@ -71,10 +71,11 @@ const Sidebar: React.FC<SidebarProps> = ({
       {/* Bouton menu mobile */}
       <button
         onClick={toggleMobile}
-        className="md:hidden fixed top-2 left-4 z-50 p-1 bg-white dark:bg-gray-800 rounded-lg shadow-sm border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+        className={`md:hidden fixed top-2 left-4 z-50 p-1 rounded-lg shadow-sm border transition-colors
+          ${theme === 'dark' ? 'dark bg-gray-800 border-gray-700 hover:bg-gray-700 text-gray-300' : 'bg-white border-gray-200 hover:bg-gray-50 text-gray-700'}`}
         aria-label="Toggle mobile menu"
       >
-        {isMobileOpen ? <Menu size={20} className="text-gray-700 dark:text-gray-300" /> : <Menu size={20} className="text-gray-700 dark:text-gray-300" />}
+        <Menu size={20} className={theme === 'dark' ? 'text-gray-300' : 'text-gray-700'} />
       </button>
 
       {/* Overlay mobile */}
@@ -89,22 +90,23 @@ const Sidebar: React.FC<SidebarProps> = ({
       {/* Sidebar */}
       <div 
         className={`
-          fixed md:relative top-0 left-0 h-full bg-white dark:bg-gray-900 border-r border-gray-100 dark:border-gray-800
-          transition-all duration-300 ease-in-out z-50 flex flex-col
+          fixed md:relative top-0 left-0 h-full transition-all duration-300 ease-in-out z-50 flex flex-col
+          ${theme === 'dark' ? 'bg-gray-900 border-gray-800' : 'bg-white border-gray-100'}
+          border-r
           ${sidebarCollapsed ? 'w-16' : 'w-64'}
           ${isMobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'}
           ${className}
         `}
       >
         {/* Header avec logo */}
-        <div className={`flex items-center ${sidebarCollapsed ? 'justify-center p-[18px] border-b border-gray-300' : 'justify-between border-b border-gray-300 p-[13px]'} ${isMobile ? 'p-[18px]' : ''}`}>
+        <div className={`flex items-center ${sidebarCollapsed ? 'justify-center p-[18px]' : 'justify-between p-[13px]'} ${isMobile ? 'p-[18px]' : ''} border-b ${theme === 'dark' ? 'border-gray-700' : 'border-gray-300'}`}> 
           <div className="flex items-center gap-3 min-w-0">
             <Logo 
               size={28} 
               className="flex-shrink-0 text-[#00C21C]"
             />
             {!sidebarCollapsed && (
-              <h4 className="text-lg font-bold text-gray-900 truncate" style={{ color: '#00C21C' }}>
+              <h4 className={`text-lg font-bold truncate ${theme === 'dark' ? 'text-[#00E621]' : 'text-[#00C21C]'}`}>
                 {companyName}
               </h4>
             )}
@@ -114,7 +116,8 @@ const Sidebar: React.FC<SidebarProps> = ({
           {!isMobile && !sidebarCollapsed && (
             <button
               onClick={onToggleCollapse}
-              className="hidden md:flex rounded-md hover:bg-gray-50 transition-colors text-gray-500 hover:text-gray-700"
+              className={`hidden md:flex rounded-md transition-colors
+                ${theme === 'dark' ? 'dark hover:bg-gray-800 text-gray-400 hover:text-gray-200' : 'hover:bg-gray-50 text-gray-500 hover:text-gray-700'}`}
               aria-label="Réduire le menu"
             >
               <ChevronLeft size={16} />
@@ -127,7 +130,8 @@ const Sidebar: React.FC<SidebarProps> = ({
           <div className="flex justify-center pt-2">
             <button
               onClick={onToggleCollapse}
-              className="rounded-md hover:bg-gray-50 transition-colors text-gray-500 hover:text-gray-700"
+              className={`rounded-md transition-colors
+                ${theme === 'dark' ? 'dark hover:bg-gray-800 text-gray-400 hover:text-gray-200' : 'hover:bg-gray-50 text-gray-500 hover:text-gray-700'}`}
               aria-label="Développer le menu"
             >
               <ChevronRight size={16} />
@@ -141,7 +145,6 @@ const Sidebar: React.FC<SidebarProps> = ({
             {items.map((item: SidebarItem) => {
               const isActive = activeItem === item.id;
               const Icon = item.icon;
-              
               return (
                 <li key={item.id} className="relative">
                   <button
@@ -150,43 +153,40 @@ const Sidebar: React.FC<SidebarProps> = ({
                       w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-left
                       transition-all duration-200 ease-in-out group relative
                       ${isActive 
-                        ? 'font-medium border border-opacity-30 dark:border-opacity-50' 
-                        : 'hover:bg-gray-50 dark:hover:bg-gray-800'
+                        ? `font-medium border border-opacity-30 ${theme === 'dark' ? 'bg-[#00E621]/20 border-[#00E621]' : 'bg-[#00C21C]/10 border-[#00C21C]'}`
+                        : `${theme === 'dark' ? 'dark hover:bg-gray-800 text-gray-400' : 'hover:bg-gray-50 text-gray-700'}`
                       }
                       ${sidebarCollapsed ? 'justify-center' : ''}
                     `}
                     style={isActive ? {
-                      backgroundColor: `rgba(${hexToRgb('#00C21C')}, ${theme === 'dark' ? '0.2' : '0.1'})`,
-                      borderColor: 'none',
                       color: theme === 'dark' ? '#00E621' : darkenColor('#00C21C', 20)
-                    } : {
-                      color: theme === 'dark' ? '#A0A0A0' : '#5D5D5D'
-                    }}
+                    } : {}}
                     title={sidebarCollapsed ? item.name : ''}
                     aria-current={isActive ? 'page' : undefined}
                   >
                     {isActive && (
                       <div 
                         className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-6 rounded-full"
-                        style={{ backgroundColor: '#00C21C' }}
+                        style={{ backgroundColor: theme === 'dark' ? '#00E621' : '#00C21C' }}
                       />
                     )}
-                    
                     <Icon 
                       size={20} 
-                      className={`flex-shrink-0 transition-colors duration-200 ${isActive ? 'text-[#00C21C]' : 'text-[#5D5D5D]'}`}
+                      className={`flex-shrink-0 transition-colors duration-200 ${isActive ? (theme === 'dark' ? 'text-[#00E621]' : 'text-[#00C21C]') : (theme === 'dark' ? 'text-gray-400' : 'text-[#5D5D5D]')}`}
                     />
-                    
                     {!sidebarCollapsed && (
                       <span className="truncate">
                         {item.name}
                       </span>
                     )}
-                    
                     {sidebarCollapsed && (
-                      <div className="absolute left-full ml-2 px-3 py-1.5 bg-gray-900 text-white text-sm rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-50 pointer-events-none">
+                      <div className={`absolute left-full ml-2 px-3 py-1.5 rounded-md opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 whitespace-nowrap z-50 pointer-events-none
+                        ${theme === 'dark' ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}
+                      >
                         {item.name}
-                        <div className="absolute top-1/2 -left-1 transform -translate-y-1/2 w-0 h-0 border-t-4 border-b-4 border-r-4 border-transparent border-r-gray-900" />
+                        <div className={`absolute top-1/2 -left-1 transform -translate-y-1/2 w-0 h-0 border-t-4 border-b-4 border-r-4 border-transparent
+                          ${theme === 'dark' ? 'border-r-gray-900' : 'border-r-white'}`}
+                        />
                       </div>
                     )}
                   </button>
@@ -198,10 +198,10 @@ const Sidebar: React.FC<SidebarProps> = ({
 
         {/* Footer */}
         {/* Footer */}
-        <div className="p-4 border-t border-gray-100 dark:border-gray-800">
+        <div className={`p-4 border-t ${theme === 'dark' ? 'border-gray-800' : 'border-gray-100'}`}>
           <div className={`flex ${sidebarCollapsed ? 'justify-center' : ''}`}>
             {!sidebarCollapsed && (
-              <div className="text-xs text-center text-gray-600 dark:text-gray-400">
+              <div className={`text-xs text-center ${theme === 'dark' ? 'text-gray-400' : 'text-gray-600'}`}>
                 © {new Date().getFullYear()} {companyName}
               </div>
             )}

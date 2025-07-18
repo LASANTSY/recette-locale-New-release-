@@ -8,7 +8,6 @@ import {
   LogOut, 
   ChevronDown,
   Menu,
-  X
 } from 'lucide-react';
 import { useTheme } from '../../../context/ThemeContext';
 
@@ -195,7 +194,7 @@ const Navbar: React.FC<NavbarProps> = ({
         {/* Bouton menu mobile + Message de salutation */}
         <div className="flex items-center flex-1 min-w-0">
           {/* Bouton menu mobile */}
-          {isMobile && (
+          {/* {isMobile && (
             <button
               onClick={onToggleSidebar}
               className={`
@@ -208,10 +207,10 @@ const Navbar: React.FC<NavbarProps> = ({
               aria-label="Toggle sidebar"
             >
               <div className="transition-transform duration-300">
-                {isSidebarCollapsed ? <Menu size={20} /> : <X size={20} />}
+                {isSidebarCollapsed ? <Menu size={20} /> : <Menu size={20} />}
               </div>
             </button>
-          )}
+          )} */}
 
           {/* Message de salutation avec animation améliorée */}
           <div className="flex-1 min-w-0">
