@@ -201,7 +201,7 @@ const Navbar: React.FC<NavbarProps> = ({
               className={`
                 p-2 rounded-lg mr-3 transition-all duration-200 hover:scale-105
                 ${isDarkMode 
-                  ? 'hover:bg-gray-700 text-gray-300' 
+                  ? 'dark hover:bg-gray-700 text-gray-300' 
                   : 'hover:bg-gray-100 text-gray-600'
                 }
               `}
@@ -245,7 +245,7 @@ const Navbar: React.FC<NavbarProps> = ({
             className={`
               p-2 rounded-lg transition-all duration-200 hover:scale-105
               ${isDarkMode 
-                ? 'hover:bg-gray-700 text-gray-300' 
+                ? 'dark hover:bg-gray-700 text-gray-300' 
                 : 'hover:bg-gray-100 text-gray-600'
               }
             `}
@@ -265,9 +265,9 @@ const Navbar: React.FC<NavbarProps> = ({
             <button
               onClick={() => setIsNotificationOpen(!isNotificationOpen)}
               className={`
-                relative p-2 rounded-lg transition-all duration-200 hover:scale-105
+                relative p-2 rounded-lg transition-all duration-700 ease-out transform duration-200 hover:scale-105
                 ${isDarkMode 
-                  ? 'hover:bg-gray-700 text-gray-300' 
+                  ? 'dark hover:bg-gray-700 text-gray-300' 
                   : 'hover:bg-gray-100 text-gray-600'
                 }
               `}
@@ -288,11 +288,11 @@ const Navbar: React.FC<NavbarProps> = ({
 
             {isNotificationOpen && (
               <div className={`
-                absolute right-0 mt-2 w-72 sm:w-80 rounded-lg shadow-lg border max-h-96 overflow-hidden
+                absolute right-0 mt-4 w-72 sm:w-80 rounded-lg shadow-lg border max-h-96 overflow-hidden
                 transform transition-all duration-300 ease-out
                 animate-in slide-in-from-top-2 fade-in-0
                 ${isDarkMode 
-                  ? 'bg-gray-800 border-gray-700' 
+                  ? 'dark bg-gray-800 border-gray-700' 
                   : 'bg-white border-gray-200'
                 }
               `}>
@@ -355,7 +355,7 @@ const Navbar: React.FC<NavbarProps> = ({
               className={`
                 flex items-center space-x-2 p-2 rounded-lg transition-all duration-200 hover:scale-105
                 ${isDarkMode 
-                  ? 'hover:bg-gray-700' 
+                  ? 'dark hover:bg-gray-700' 
                   : 'hover:bg-gray-100'
                 }
               `}
@@ -414,7 +414,7 @@ const Navbar: React.FC<NavbarProps> = ({
                     className={`
                       w-full flex items-center space-x-2 px-4 py-2 text-left transition-all duration-200 hover:scale-105
                       ${isDarkMode 
-                        ? 'hover:bg-gray-700 text-gray-200' 
+                        ? 'dark hover:bg-gray-700 text-gray-200' 
                         : 'hover:bg-gray-50 text-gray-700'
                       }
                     `}
@@ -431,7 +431,7 @@ const Navbar: React.FC<NavbarProps> = ({
                     className={`
                       w-full flex items-center space-x-2 px-4 py-2 text-left transition-all duration-200 hover:scale-105
                       ${isDarkMode 
-                        ? 'hover:bg-gray-700 text-gray-200' 
+                        ? 'dark hover:bg-gray-700 text-gray-200' 
                         : 'hover:bg-gray-50 text-gray-700'
                       }
                     `}
@@ -440,7 +440,7 @@ const Navbar: React.FC<NavbarProps> = ({
                     <span className="text-sm">Paramètres</span>
                   </button>
                   
-                  <hr className={`my-2 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`} />
+                  <hr className={`my-2 ${isDarkMode ? 'dark border-gray-700' : 'border-gray-200'}`} />
                   
                   <button
                     onClick={() => {
@@ -450,7 +450,7 @@ const Navbar: React.FC<NavbarProps> = ({
                     className={`
                       w-full flex items-center space-x-2 px-4 py-2 text-left transition-all duration-200 hover:scale-105
                       ${isDarkMode 
-                        ? 'hover:bg-red-900/20 text-red-400' 
+                        ? 'dark hover:bg-red-900/20 text-red-400' 
                         : 'hover:bg-red-50 text-red-700'
                       }
                     `}
